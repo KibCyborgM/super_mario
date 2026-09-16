@@ -1,5 +1,6 @@
 #include "first_level.hpp"
 
+#include "another_second_level.hpp"
 #include "second_level.hpp"
 
 using biv::FirstLevel;
@@ -11,7 +12,7 @@ FirstLevel::FirstLevel(UIFactory* ui_factory) : GameLevel(ui_factory) {
 biv::GameLevel* FirstLevel::get_next() {
 	if (!next) {
 		clear_data();
-		next = new biv::SecondLevel(ui_factory);
+		next = new biv::AnotherSecondLevel(ui_factory);
 	}
 	return next;
 }

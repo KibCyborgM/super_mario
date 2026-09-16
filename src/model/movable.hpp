@@ -12,6 +12,8 @@ namespace biv {
 			float vspeed = 0;
 			float hspeed = 0;
 
+			bool flyable = false;
+
 		protected:
 			Movable() = default;
 			Movable(

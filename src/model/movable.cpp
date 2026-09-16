@@ -40,7 +40,7 @@ void Movable::move_horizontally() noexcept {
 }
 
 void Movable::move_vertically() noexcept {
-	if (vspeed < MAX_V_SPEED) {
+	if (vspeed < MAX_V_SPEED and !flyable) {
 		vspeed += V_ACCELERATION;
 	}
 	top_left.y += vspeed;

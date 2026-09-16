@@ -1,8 +1,10 @@
 target_sources(${PROJECT_NAME}
 	PRIVATE
+		another_second_level.cpp
 		first_level.cpp
 		game_level.cpp
 		second_level.cpp
+		third_level.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
