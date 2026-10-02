@@ -2,8 +2,8 @@
 
 using biv::ConsoleFlyableEnemy;
 
-ConsoleFlyableEnemy::ConsoleFlyableEnemy(const Coord& top_left, const int width, const int height, const ConsoleGameMap* game_map) 
-	: FlyableEnemy(top_left, width, height, game_map) {}
+ConsoleFlyableEnemy::ConsoleFlyableEnemy(const Coord& top_left, const int width, const int height) 
+	: FlyableEnemy(top_left, width, height) {}
 
 char ConsoleFlyableEnemy::get_brush() const noexcept {
 	return 'e';

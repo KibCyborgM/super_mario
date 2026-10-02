@@ -32,13 +32,15 @@ void JumpableEnemy::process_mario_collision(Collisionable* mario) noexcept {
 }
 
 void JumpableEnemy::process_vertical_static_collision(Rect* obj) noexcept {
-	
-	// top_left.x += hspeed;
-	// if (!has_collision(obj)) {
-	// 	process_horizontal_static_collision(obj);
-	// } else {
-	// 	top_left.x -= hspeed;
-	// }
+	// Проверка: не свалился ли враг с корабля. 
+	// Т.е., если он на краю, то он должен разверуться 
+	// и побежать в обратную сторону.
+	top_left.x += hspeed;
+	if (!has_collision(obj)) {
+		process_horizontal_static_collision(obj);
+	} else {
+		top_left.x -= hspeed;
+	}
 	
 	// Особенность модели вертикального передвижения в игре.
 	if (vspeed > 0) {
