@@ -68,7 +68,7 @@ int main() {
 	biv::Game game;
 	biv::UIFactory* ui_factory = new biv::ConsoleUIFactory(&game);
 	biv::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
-	biv::GameLevel* game_level = new biv::AnotherSecondLevel(ui_factory);
+	biv::GameLevel* game_level = new biv::FirstLevel(ui_factory);
 	biv::Mario* mario = ui_factory->get_mario();
 	
 	biv::UserInput user_input;
