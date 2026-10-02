@@ -19,6 +19,7 @@ namespace biv {
 			std::vector<Rect*> static_objs;
 			std::vector<Collisionable*> collisionable_objs;
 			std::vector<Movable*> movable_objs;
+			std::vector<Movable*> movable_and_collisionable_objs;
 			
 			Mario* mario = nullptr;
 			
@@ -33,9 +34,11 @@ namespace biv {
 			void add_mario(Mario*);
 			void add_movable(Movable*);
 			void add_static_obj(Rect*);
+			void add_movable_and_collisionable_obj(Movable*);
 			
 			void check_horizontally_static_collisions() noexcept;
 			void check_mario_collision();
+			void check_platforms_collision();			
 			bool check_static_collisions(Collisionable* obj) const noexcept;
 			void check_vertically_static_collisions() noexcept;
 			
@@ -55,6 +58,7 @@ namespace biv {
 			void remove_movable(Movable*);
 			void remove_objs();
 			void remove_static_obj(Rect*);
+			void remove_movable_and_collisionable_obj(Movable*);
 			
 			void start_level() noexcept;
 
