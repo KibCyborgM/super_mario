@@ -21,7 +21,7 @@ biv::Speed Enemy::get_speed() const noexcept {
 void Enemy::process_horizontal_static_collision(Rect* obj) noexcept {
 	hspeed = -hspeed;
 	move_horizontally();
-}
+}	
 
 void Enemy::process_mario_collision(Collisionable* mario) noexcept {
 	if (mario->get_speed().v > 0 && mario->get_speed().v != V_ACCELERATION) {
