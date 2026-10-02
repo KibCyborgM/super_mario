@@ -14,6 +14,10 @@ Movable::Movable(
 	this->hspeed = hspeed;
 }
 
+void Movable::add_vspeed(float speed) noexcept{
+	vspeed += speed;
+}
+
 float Movable::get_vspeed() const noexcept {
 	return vspeed;
 }

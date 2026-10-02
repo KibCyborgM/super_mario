@@ -10,6 +10,7 @@
 #include "map_movable.hpp"
 #include "mario.hpp"
 #include "movable.hpp"
+#include "movable_collisionable.hpp"
 #include "rect.hpp"
 
 namespace biv {
@@ -19,7 +20,7 @@ namespace biv {
 			std::vector<Rect*> static_objs;
 			std::vector<Collisionable*> collisionable_objs;
 			std::vector<Movable*> movable_objs;
-			std::vector<Movable*> movable_and_collisionable_objs;
+			std::vector<MovableCollisionable*> movable_and_collisionable_objs;
 			
 			Mario* mario = nullptr;
 			
@@ -34,7 +35,7 @@ namespace biv {
 			void add_mario(Mario*);
 			void add_movable(Movable*);
 			void add_static_obj(Rect*);
-			void add_movable_and_collisionable_obj(Movable*);
+			void add_movable_and_collisionable_obj(MovableCollisionable*);
 			
 			void check_horizontally_static_collisions() noexcept;
 			void check_mario_collision();
@@ -58,7 +59,7 @@ namespace biv {
 			void remove_movable(Movable*);
 			void remove_objs();
 			void remove_static_obj(Rect*);
-			void remove_movable_and_collisionable_obj(Movable*);
+			void remove_movable_and_collisionable_obj(MovableCollisionable*);
 			
 			void start_level() noexcept;
 

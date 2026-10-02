@@ -26,7 +26,7 @@ void Game::add_static_obj(Rect* obj) {
 	static_objs.push_back(obj);
 }
 
-void Game::add_movable_and_collisionable_obj(Movable* obj){
+void Game::add_movable_and_collisionable_obj(MovableCollisionable* obj){
 	movable_and_collisionable_objs.push_back(obj);
 }
 
@@ -59,9 +59,16 @@ void Game::check_mario_collision() {
 }
 
 void Game::check_platforms_collision() {
-	//TODO
-}
+	for (MovableCollisionable* obj: movable_and_collisionable_objs){
+		biv::Rect rect = obj->get_rect(); 
+		if (mario->has_collision(obj)) { 
+			if (mario->has_collision(&rect)){
+				mario->add_vspeed(obj->get_vspeed());
+			}
+		}
 
+	}
+}
 bool Game::check_static_collisions(Collisionable* obj) const noexcept {
 	for (Rect* static_obj: static_objs) {
 		if (obj->has_collision(static_obj)) {
@@ -150,7 +157,7 @@ void Game::remove_static_obj(Rect* obj) {
 	remove_obj(static_objs, obj);
 }
 
-void Game::remove_movable_and_collisionable_obj(Movable* obj){
+void Game::remove_movable_and_collisionable_obj(MovableCollisionable* obj){
 	remove_obj(movable_and_collisionable_objs, obj);
 }
 
