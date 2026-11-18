@@ -104,6 +104,8 @@ void ConsoleUIFactory::create_platform(
 	ConsolePlatform* platform = new ConsolePlatform(top_left, width, height);
 	platforms.push_back(platform);
 	game->add_map_movable(platform);
+	game->add_movable(platform);
+	game->add_collisionable(platform);
 	game->add_movable_and_collisionable_obj(platform);
 	game_map->add_obj(platform);
 }
