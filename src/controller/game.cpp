@@ -59,16 +59,28 @@ void Game::check_mario_collision() {
 }
 
 void Game::check_platforms_collision() {
-	for (MovableCollisionable* obj: movable_and_collisionable_objs){
-		biv::Rect rect = obj->get_rect(); 
-		if (mario->has_collision(obj)) { 
-			if (mario->has_collision(&rect)){
-				mario->add_vspeed(obj->get_vspeed());
-			}
-		}
+    for (auto* obj : movable_and_collisionable_objs) {
+        float speed = mario->get_vspeed();
 
-	}
+        float bottom = mario->get_y() + mario->get_height();
+        float previous_bottom = bottom - speed;
+        float platform_top = obj->get_y();
+
+        bool overlap_x =
+            mario->get_right() > obj->get_left() &&
+            mario->get_left() < obj->get_right();
+
+        if (speed > 0 &&
+            overlap_x &&
+            previous_bottom <= platform_top &&
+            bottom >= platform_top) {
+
+            mario->move_vertical_offset(platform_top - bottom);
+            mario->add_vspeed(-speed);
+        }
+    }
 }
+
 bool Game::check_static_collisions(Collisionable* obj) const noexcept {
 	for (Rect* static_obj: static_objs) {
 		if (obj->has_collision(static_obj)) {
@@ -149,6 +161,7 @@ void Game::remove_objs() {
 	collisionable_objs.clear();
 	map_movable_objs.clear();
 	movable_objs.clear();
+	movable_and_collisionable_objs.clear();
 	static_objs.clear();
 	remove_mario();
 }
