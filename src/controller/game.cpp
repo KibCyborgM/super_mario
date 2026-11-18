@@ -59,24 +59,42 @@ void Game::check_mario_collision() {
 }
 
 void Game::check_platforms_collision() {
-    for (auto* obj : movable_and_collisionable_objs) {
-        float speed = mario->get_vspeed();
+    for (Collisionable* obj : collisionable_objs) {
+        Movable* movable = dynamic_cast<Movable*>(obj);
 
-        float bottom = mario->get_y() + mario->get_height();
-        float previous_bottom = bottom - speed;
-        float platform_top = obj->get_y();
+        if (movable == nullptr ||
+            !obj->is_active() ||
+            dynamic_cast<MovableCollisionable*>(obj) != nullptr)
+            continue;
 
-        bool overlap_x =
-            mario->get_right() > obj->get_left() &&
-            mario->get_left() < obj->get_right();
+        float speed = movable->get_vspeed();
 
-        if (speed > 0 &&
-            overlap_x &&
-            previous_bottom <= platform_top &&
-            bottom >= platform_top) {
+        if (speed <= 0)
+            continue;
 
-            mario->move_vertical_offset(platform_top - bottom);
-            mario->add_vspeed(-speed);
+        for (MovableCollisionable* platform :
+             movable_and_collisionable_objs) {
+
+            float bottom = movable->get_y() + movable->get_height();
+            float previous_bottom = bottom - speed;
+            float platform_top = platform->get_y();
+
+            bool overlap_x =
+                movable->get_right() > platform->get_left() &&
+                movable->get_left() < platform->get_right();
+
+            if (overlap_x && previous_bottom <= platform_top &&
+                bottom >= platform_top) {
+
+                obj->process_vertical_static_collision(platform);
+
+                movable->move_vertical_offset(
+                    platform_top -
+                    (movable->get_y() + movable->get_height())
+                );
+
+                break;
+            }
         }
     }
 }
@@ -139,6 +157,40 @@ void Game::move_objs_vertically() noexcept {
 	for (Movable* obj: movable_objs) {
 		obj->move_vertically();
 	}
+}
+
+void Game::move_objs_with_platforms() noexcept {
+    for (Collisionable* obj : collisionable_objs) {
+        Movable* movable = dynamic_cast<Movable*>(obj);
+
+        if (movable == nullptr || !obj->is_active() ||
+            dynamic_cast<MovableCollisionable*>(obj) != nullptr)
+            continue;
+
+        if (movable->get_vspeed() < 0)
+            continue;
+
+        for (MovableCollisionable* platform :
+             movable_and_collisionable_objs) {
+
+            float bottom = movable->get_y() + movable->get_height();
+            float top = platform->get_y();
+
+            bool standing = bottom >= top - 0.1f &&
+                bottom <= top + 0.1f;
+
+            bool overlap_x =
+                movable->get_right() > platform->get_left() &&
+                movable->get_left() < platform->get_right();
+
+            if (standing && overlap_x) {
+                movable->move_horizontal_offset(
+                    platform->get_hspeed()
+                );
+                break;
+            }
+        }
+    }
 }
 
 void Game::remove_collisionable(Collisionable* obj) {

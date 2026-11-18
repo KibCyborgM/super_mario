@@ -99,6 +99,7 @@ int main() {
 		}
 		
 		// 3. Обновление внутреннего состояния игры
+		game.move_objs_with_platforms();
 		game.move_objs_horizontally();
 		game.check_horizontally_static_collisions();
 		

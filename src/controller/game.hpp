@@ -52,6 +52,7 @@ namespace biv {
 			void move_map_right() noexcept;
 			void move_objs_horizontally() noexcept;
 			void move_objs_vertically() noexcept;
+			void move_objs_with_platforms() noexcept;
 			
 			void remove_collisionable(Collisionable*);
 			void remove_map_movable(MapMovable*);
