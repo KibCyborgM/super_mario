@@ -8,6 +8,7 @@
 #include "console_game_map.hpp"
 #include "console_mario.hpp"
 #include "console_money.hpp"
+#include "console_platform.hpp"
 #include "console_ship.hpp"
 #include "ui_factory.hpp"
 
@@ -17,6 +18,7 @@ namespace biv {
 			ConsoleGameMap* game_map = nullptr;
 			std::vector<ConsoleBox*> boxes;
 			std::vector<ConsoleFullBox*> full_boxes;
+			std::vector<ConsolePlatform*> platforms;
 			std::vector<ConsoleShip*> ships;
 			ConsoleMario* mario = nullptr;
 			std::vector<ConsoleEnemy*> enemies;
@@ -47,6 +49,9 @@ namespace biv {
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_money(
+				const Coord& top_left, const int width, const int height
+			) override;
+			void create_platform(
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_ship(

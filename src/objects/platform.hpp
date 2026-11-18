@@ -1,11 +1,11 @@
 #pragma once
 
-#include "collisionable.hpp"
+#include "movable_collisionable.hpp"
 #include "rect_map_movable_adapter.hpp"
 #include "movable.hpp"
 
 namespace biv {
-	class Platform : public Collisionable, public RectMapMovableAdapter, public Movable {
+	class Platform : virtual public MovableCollisionable, public RectMapMovableAdapter {
 		public:
 			Platform(
 				const Coord& top_left, const int width, const int height
