@@ -14,7 +14,5 @@ namespace biv {
             
             float get_hspeed();
             float get_vspeed();
-			
-			
 	};
 }

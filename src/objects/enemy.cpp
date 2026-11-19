@@ -48,3 +48,24 @@ void Enemy::process_vertical_static_collision(Rect* obj) noexcept {
 		vspeed = 0;
 	}
 }
+
+void Enemy::process_vertical_platform_collision(Movable* obj) noexcept {
+
+	top_left.x += hspeed;
+	if (!has_collision(obj)) {
+		hspeed = -hspeed;
+		move_horizontally();
+	}
+	else {
+		top_left.x -= hspeed;
+	}
+
+	if (vspeed > 0) {
+		top_left.y -= vspeed;
+		vspeed = 0;
+	}
+
+	top_left.x += obj->get_hspeed();
+
+    
+}

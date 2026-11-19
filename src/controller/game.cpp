@@ -59,44 +59,15 @@ void Game::check_mario_collision() {
 }
 
 void Game::check_platforms_collision() {
-    for (Collisionable* obj : collisionable_objs) {
-        Movable* movable = dynamic_cast<Movable*>(obj);
+    for (Collisionable* obj: collisionable_objs) {
+		for (Movable* movable_and_collisionable_obj: movable_and_collisionable_objs) {
+			if (obj->has_collision(movable_and_collisionable_obj)) {
+				obj->process_vertical_platform_collision(movable_and_collisionable_obj);
 
-        if (movable == nullptr ||
-            !obj->is_active() ||
-            dynamic_cast<MovableCollisionable*>(obj) != nullptr)
-            continue;
-
-        float speed = movable->get_vspeed();
-
-        if (speed <= 0)
-            continue;
-
-        for (MovableCollisionable* platform :
-             movable_and_collisionable_objs) {
-
-            float bottom = movable->get_y() + movable->get_height();
-            float previous_bottom = bottom - speed;
-            float platform_top = platform->get_y();
-
-            bool overlap_x =
-                movable->get_right() > platform->get_left() &&
-                movable->get_left() < platform->get_right();
-
-            if (overlap_x && previous_bottom <= platform_top &&
-                bottom >= platform_top) {
-
-                obj->process_vertical_static_collision(platform);
-
-                movable->move_vertical_offset(
-                    platform_top -
-                    (movable->get_y() + movable->get_height())
-                );
-
-                break;
-            }
-        }
-    }
+				break;
+			}
+		}
+	}
 }
 
 bool Game::check_static_collisions(Collisionable* obj) const noexcept {
@@ -173,17 +144,22 @@ void Game::move_objs_with_platforms() noexcept {
         for (MovableCollisionable* platform :
              movable_and_collisionable_objs) {
 
-            float bottom = movable->get_y() + movable->get_height();
-            float top = platform->get_y();
+			float bottom = movable->get_y() + movable->get_height();
+			float top = platform->get_y();
 
-            bool standing = bottom >= top - 0.1f &&
-                bottom <= top + 0.1f;
+			bool overlap_x =
+				movable->get_x() + movable->get_right() > platform->get_x() &&
+				movable->get_x() < platform->get_x() + platform->get_right();
 
-            bool overlap_x =
-                movable->get_right() > platform->get_left() &&
-                movable->get_left() < platform->get_right();
+			bool standing =
+				bottom >= top - 0.1f &&
+				bottom <= top + 0.1f &&
+				overlap_x &&
+				movable->get_vspeed() >= 0;
 
-            if (standing && overlap_x) {
+    
+
+            if (standing) {
                 movable->move_horizontal_offset(
                     platform->get_hspeed()
                 );

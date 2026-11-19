@@ -11,6 +11,7 @@ namespace biv {
 
 			float vspeed = 0;
 			float hspeed = 0;
+			float prev_hspeed = 0;
 
 			bool flyable = false;
 
@@ -25,6 +26,7 @@ namespace biv {
 		public:
 			void add_vspeed(float speed) noexcept; 
 			float get_vspeed() const noexcept;
+			float get_hspeed() const noexcept;
 			void jump() noexcept;
 			void move_horizontal_offset(const float offset) noexcept;
 			void move_vertical_offset(const float offset) noexcept;

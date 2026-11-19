@@ -37,3 +37,5 @@ void FlyableEnemy::process_vertical_static_collision(Rect* obj) noexcept {
 	vspeed = -vspeed;
     move_vertically();
 }
+
+void FlyableEnemy::process_vertical_platform_collision(Movable* obj) noexcept {}

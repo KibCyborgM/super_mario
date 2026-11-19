@@ -40,3 +40,17 @@ void Mario::process_vertical_static_collision(Rect* obj) noexcept {
 	}
 	vspeed = 0;
 }
+
+void Mario::process_vertical_platform_collision(Movable* obj) noexcept {
+	if (vspeed > 0) {
+		// Марио упал на корабль.
+		top_left.y -= vspeed;
+	} else if (vspeed < 0) {
+		// Марио ударился головой о полку и после этого должен падать вниз.
+		top_left.y -= vspeed;
+	}
+	vspeed = 0;
+
+
+    top_left.x += obj->get_hspeed();
+}

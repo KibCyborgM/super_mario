@@ -23,7 +23,8 @@ biv::GameLevel* FirstLevel::get_next() {
 void FirstLevel::init_data() {
 	ui_factory->create_mario({39, 10}, 3, 3);
 	
-	ui_factory->create_ship({20, 25}, 40, 2);
+	ui_factory->create_ship({5, 25}, 4, 2);
+	ui_factory->create_platform({20, 25}, 40, 2);
 	
 	ui_factory->create_full_box({30, 15}, 5, 3);
 	ui_factory->create_full_box({50, 15}, 5, 3);
