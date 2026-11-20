@@ -29,7 +29,7 @@ void AnotherSecondLevel::init_data() {
     ui_factory->create_ship({5, 20}, 30, 2);
 
 	ui_factory->create_ship({45, 12}, 15, 6);
-	ui_factory->create_full_box({50, 4}, 4, 3);
+	ui_factory->create_full_box({50, 4}, 5, 3);
 
 	ui_factory->create_ship({70, 27}, 50, 3);
     ui_factory->create_ship({110, 20}, 5, 9);
@@ -38,7 +38,7 @@ void AnotherSecondLevel::init_data() {
 	
 
 	ui_factory->create_ship({150, 18}, 45, 2);
-	ui_factory->create_full_box({180, 10}, 6, 3);
+	ui_factory->create_full_box({180, 10}, 5, 3);
 
     ui_factory->create_ship({230, 20}, 15, 7);
 

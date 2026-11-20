@@ -20,10 +20,17 @@ biv::GameLevel* ThirdLevel::get_next() {
 void ThirdLevel::init_data() {
 	ui_factory->create_mario({39, 10}, 3, 3);
 	
+	ui_factory->create_ship({10, 20}, 10, 7);
 	ui_factory->create_ship({20, 25}, 40, 2);
 	ui_factory->create_ship({60, 20}, 10, 7);
 	ui_factory->create_ship({80, 25}, 20, 2);
 	ui_factory->create_ship({120, 20}, 10, 7);
 	ui_factory->create_ship({150, 25}, 40, 2);
 	ui_factory->create_ship({210, 20}, 10, 7);
+
+	ui_factory->create_flyable_enemy({20, 20}, 3, 2);
+	ui_factory->create_flyable_enemy({56, 20}, 3, 2);
+
+	ui_factory->create_jumpable_enemy({70, 20}, 3, 2);
+	ui_factory->create_jumpable_enemy({90, 20}, 3, 2);
 }
