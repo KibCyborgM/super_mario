@@ -1,0 +1,10 @@
+#include "qt_mario.hpp"
+
+using biv::QtMario;
+
+QtMario::QtMario(const Coord& top_left, const int width, const int height) 
+	: Mario(top_left, width, height) {}
+
+biv::QtSprite QtMario::get_sprite() const noexcept {
+	return QtSprite::MARIO;
+}

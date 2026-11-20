@@ -2,7 +2,8 @@
 
 namespace biv {
 	class MapMovable {
-		public: 
+		public:
+            virtual ~MapMovable() = default; 
 			static const int MAP_STEP = 1;
 
 		public:

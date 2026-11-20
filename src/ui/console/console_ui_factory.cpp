@@ -4,16 +4,32 @@ using biv::ConsoleUIFactory;
 
 ConsoleUIFactory::ConsoleUIFactory(Game* game) : UIFactory(game) {}
 
+ConsoleUIFactory::~ConsoleUIFactory() {
+    clear_data();
+    delete game_map;
+}
+
 void ConsoleUIFactory::clear_data() {
-	game->remove_objs();
-	game_map->remove_objs();
-	delete mario;
-	mario = nullptr;
-	boxes.clear();
-	full_boxes.clear();
-	ships.clear();
-	enemies.clear();
-	moneys.clear();
+    game->remove_objs();
+    if (game_map != nullptr) game_map->remove_objs();
+    delete mario;
+    mario = nullptr;
+    for (ConsoleBox* obj : boxes) delete obj;
+    boxes.clear();
+    for (ConsoleFullBox* obj : full_boxes) delete obj;
+    full_boxes.clear();
+    for (ConsolePlatform* obj : platforms) delete obj;
+    platforms.clear();
+    for (ConsoleShip* obj : ships) delete obj;
+    ships.clear();
+    for (ConsoleEnemy* obj : enemies) delete obj;
+    enemies.clear();
+    for (ConsoleFlyableEnemy* obj : flyable_enemies) delete obj;
+    flyable_enemies.clear();
+    for (ConsoleJumpableEnemy* obj : jumpable_enemies) delete obj;
+    jumpable_enemies.clear();
+    for (ConsoleMoney* obj : moneys) delete obj;
+    moneys.clear();
 }
 
 void ConsoleUIFactory::create_box(

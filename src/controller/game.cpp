@@ -148,8 +148,8 @@ void Game::move_objs_with_platforms() noexcept {
 			float top = platform->get_y();
 
 			bool overlap_x =
-				movable->get_x() + movable->get_right() > platform->get_x() &&
-				movable->get_x() < platform->get_x() + platform->get_right();
+				movable->get_right() > platform->get_left() &&
+                movable->get_left() < platform->get_right();
 
 			bool standing =
 				bottom >= top - 0.1f &&

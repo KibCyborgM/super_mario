@@ -11,6 +11,7 @@ namespace biv {
 			bool on_platform = false;
 
 		public:
+            virtual ~Collisionable() = default;
 			bool has_collision(Rect*) const noexcept;
 			bool is_active() const noexcept;
 			void kill() noexcept;

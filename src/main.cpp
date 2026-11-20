@@ -19,10 +19,10 @@
 	- Приведите примеры кода, отображающие этот прицип. -> 50-60 стр.
 */
 #include <thread>
+#include <memory>
 
 #include "another_second_level.hpp"
 
-#include "console_ui_factory.hpp"
 #include "first_level.hpp"
 #include "game.hpp"
 #include "game_level.hpp"
@@ -34,20 +34,30 @@
 #include "ui_factory.hpp"
 
 #ifdef WINDOWS_CONSOLE
+    #include "console_ui_factory.hpp"
 	#include "windows_control_settings.hpp"
 	#include "windows_keyboard.hpp"
 #elif defined(LINUX_CONSOLE)
+    #include "console_ui_factory.hpp"
 	#include "linux_control_settings.hpp"
 	#include "linux_keyboard.hpp"
 	#include "ncurses.h"
+#elif defined(QT_GUI)
+    #include <QApplication>
+    #include "qt_control_settings.hpp"
+    #include "qt_keyboard.hpp"
+    #include "qt_ui_factory.hpp"
 #endif
 
-int main() {	
+int main(int argc, char* argv[]) {	
 	// 1. Установка параметров игры
 	using namespace std::chrono_literals;
 	
 	const int map_height = 30;
 	const int map_weight = 140;
+	#if defined(QT_GUI)
+	QApplication qt_app(argc, argv);
+	#endif
 	auto frame_delay = std::chrono::milliseconds(0);
 	
 	biv::OSControlSettings* control_settings = nullptr;
@@ -60,15 +70,24 @@ int main() {
 		control_settings = new biv::LinuxControlSettings(map_height, map_weight);
 		keyboard = new biv::LinuxKeyboard();
 		frame_delay = std::chrono::milliseconds(50);
-	#endif
+    #elif defined(QT_GUI)
+        control_settings = new biv::QtControlSettings();
+        keyboard = new biv::QtKeyboard();
+        frame_delay = std::chrono::milliseconds(30);
+    #endif
 	
 	control_settings->init();
 	keyboard->on();
 	
 	biv::Game game;
-	biv::UIFactory* ui_factory = new biv::ConsoleUIFactory(&game);
+	#if defined(QT_GUI)
+    biv::UIFactory* ui_factory = new biv::QtUIFactory(&game);
+    #else
+    biv::UIFactory* ui_factory = new biv::ConsoleUIFactory(&game);
+    #endif
 	biv::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
-	biv::GameLevel* game_level = new biv::FirstLevel(ui_factory);
+	biv::GameLevel* first_level = new biv::FirstLevel(ui_factory);
+    biv::GameLevel* game_level = first_level;
 	biv::Mario* mario = ui_factory->get_mario();
 	
 	biv::UserInput user_input;
@@ -96,6 +115,8 @@ int main() {
 			case biv::UserInput::EXIT:
 				game.finish();
 				break;
+            case biv::UserInput::NO_INPUT:
+                break;
 		}
 		
 		// 3. Обновление внутреннего состояния игры
@@ -143,4 +164,11 @@ int main() {
 	);
 	
 	// 6. Завершение
+    keyboard->off();
+    // Первым удаляем уровень/фабрику: QtGameMap уничтожит окно,
+    // пока QApplication ещё существует.
+    delete first_level;
+    delete ui_factory;
+    delete keyboard;
+    delete control_settings;
 }

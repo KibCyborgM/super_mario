@@ -24,6 +24,7 @@ namespace biv {
 			);
 
 		public:
+            virtual ~Movable() = default;
 			void add_vspeed(float speed) noexcept; 
 			float get_vspeed() const noexcept;
 			float get_hspeed() const noexcept;

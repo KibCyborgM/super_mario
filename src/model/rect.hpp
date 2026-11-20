@@ -10,6 +10,7 @@ namespace biv {
 			int height;
 
 		public:
+            virtual ~Rect() = default;
 			Rect() = default;
 			Rect(const Coord& top_left, const int width, const int height);
 

@@ -1,1 +1,5 @@
-add_subdirectory(console)
+if(GAME_TYPE STREQUAL "QtGui")
+    add_subdirectory(qt)
+else()
+    add_subdirectory(console)
+endif()
