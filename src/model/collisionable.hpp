@@ -1,5 +1,6 @@
 #pragma once
 
+#include "movable.hpp"
 #include "rect.hpp"
 #include "speed.hpp"
 
@@ -7,6 +8,7 @@ namespace biv {
 	class Collisionable {
 		protected:
 			bool is_active_ = true;
+			bool on_platform = false;
 
 		public:
 			bool has_collision(Rect*) const noexcept;
@@ -19,5 +21,6 @@ namespace biv {
 			virtual void process_horizontal_static_collision(Rect*) noexcept = 0;
 			virtual void process_mario_collision(Collisionable*) noexcept = 0;
 			virtual void process_vertical_static_collision(Rect*) noexcept = 0;
+			virtual void process_vertical_platform_collision(Movable*) noexcept = 0;
 	};
 }

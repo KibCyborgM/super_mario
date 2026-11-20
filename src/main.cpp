@@ -16,9 +16,11 @@
 	
 	- На основе какого приципа ООП построен алгоритм игры?
 	- Какими элементами языка С++ реализуется этот принцип?
-	- Приведите примеры кода, отображающие этот прицип.
+	- Приведите примеры кода, отображающие этот прицип. -> 50-60 стр.
 */
 #include <thread>
+
+#include "another_second_level.hpp"
 
 #include "console_ui_factory.hpp"
 #include "first_level.hpp"
@@ -27,6 +29,7 @@
 #include "game_map.hpp"
 #include "keyboard.hpp"
 #include "mario.hpp"
+#include "third_level.hpp"
 #include "os_control_settings.hpp"
 #include "ui_factory.hpp"
 
@@ -39,12 +42,12 @@
 	#include "ncurses.h"
 #endif
 
-int main() {
+int main() {	
 	// 1. Установка параметров игры
 	using namespace std::chrono_literals;
 	
 	const int map_height = 30;
-	const int map_weight = 200;
+	const int map_weight = 140;
 	auto frame_delay = std::chrono::milliseconds(0);
 	
 	biv::OSControlSettings* control_settings = nullptr;
@@ -97,9 +100,11 @@ int main() {
 		
 		// 3. Обновление внутреннего состояния игры
 		game.move_objs_horizontally();
+		game.move_objs_with_platforms();
 		game.check_horizontally_static_collisions();
 		
 		game.move_objs_vertically();
+		game.check_platforms_collision();
 		game.check_mario_collision();
 		game.check_vertically_static_collisions();
 		

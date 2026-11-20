@@ -36,3 +36,12 @@ void Money::process_vertical_static_collision(Rect* obj) noexcept {
 		vspeed = 0;
 	}
 }
+
+void Money::process_vertical_platform_collision(Movable* obj) noexcept {
+	if (vspeed > 0) {
+		top_left.y -= vspeed;
+		vspeed = 0;
+	}
+
+    top_left.x += obj->get_hspeed();
+}

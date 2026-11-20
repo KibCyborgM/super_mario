@@ -26,3 +26,5 @@ void FullBox::process_mario_collision(Collisionable* mario) noexcept {
 }
 
 void FullBox::process_vertical_static_collision(Rect* obj) noexcept {}
+
+void FullBox::process_vertical_platform_collision(Movable* obj) noexcept {}

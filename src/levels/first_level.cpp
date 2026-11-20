@@ -1,5 +1,6 @@
 #include "first_level.hpp"
 
+#include "another_second_level.hpp"
 #include "second_level.hpp"
 
 using biv::FirstLevel;
@@ -11,7 +12,7 @@ FirstLevel::FirstLevel(UIFactory* ui_factory) : GameLevel(ui_factory) {
 biv::GameLevel* FirstLevel::get_next() {
 	if (!next) {
 		clear_data();
-		next = new biv::SecondLevel(ui_factory);
+		next = new biv::AnotherSecondLevel(ui_factory);
 	}
 	return next;
 }
@@ -22,7 +23,8 @@ biv::GameLevel* FirstLevel::get_next() {
 void FirstLevel::init_data() {
 	ui_factory->create_mario({39, 10}, 3, 3);
 	
-	ui_factory->create_ship({20, 25}, 40, 2);
+	ui_factory->create_ship({5, 25}, 4, 2);
+	ui_factory->create_platform({20, 25}, 40, 2);
 	
 	ui_factory->create_full_box({30, 15}, 5, 3);
 	ui_factory->create_full_box({50, 15}, 5, 3);

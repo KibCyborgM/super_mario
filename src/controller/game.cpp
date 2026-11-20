@@ -26,6 +26,10 @@ void Game::add_static_obj(Rect* obj) {
 	static_objs.push_back(obj);
 }
 
+void Game::add_movable_and_collisionable_obj(MovableCollisionable* obj){
+	movable_and_collisionable_objs.push_back(obj);
+}
+
 void Game::check_horizontally_static_collisions() noexcept {
 	for (Collisionable* obj: collisionable_objs) {
 		for (Rect* static_obj: static_objs) {
@@ -49,6 +53,18 @@ void Game::check_mario_collision() {
 				collisionable_objs[i] = collisionable_objs.back();
 				collisionable_objs.pop_back();
 				i--;
+			}
+		}
+	}
+}
+
+void Game::check_platforms_collision() {
+    for (Collisionable* obj: collisionable_objs) {
+		for (Movable* movable_and_collisionable_obj: movable_and_collisionable_objs) {
+			if (obj->has_collision(movable_and_collisionable_obj)) {
+				obj->process_vertical_platform_collision(movable_and_collisionable_obj);
+
+				break;
 			}
 		}
 	}
@@ -114,6 +130,45 @@ void Game::move_objs_vertically() noexcept {
 	}
 }
 
+void Game::move_objs_with_platforms() noexcept {
+    for (Collisionable* obj : collisionable_objs) {
+        Movable* movable = dynamic_cast<Movable*>(obj);
+
+        if (movable == nullptr || !obj->is_active() ||
+            dynamic_cast<MovableCollisionable*>(obj) != nullptr)
+            continue;
+
+        if (movable->get_vspeed() < 0)
+            continue;
+
+        for (MovableCollisionable* platform :
+             movable_and_collisionable_objs) {
+
+			float bottom = movable->get_y() + movable->get_height();
+			float top = platform->get_y();
+
+			bool overlap_x =
+				movable->get_x() + movable->get_right() > platform->get_x() &&
+				movable->get_x() < platform->get_x() + platform->get_right();
+
+			bool standing =
+				bottom >= top - 0.1f &&
+				bottom <= top + 0.1f &&
+				overlap_x &&
+				movable->get_vspeed() >= 0;
+
+    
+
+            if (standing) {
+                movable->move_horizontal_offset(
+                    platform->get_hspeed()
+                );
+                break;
+            }
+        }
+    }
+}
+
 void Game::remove_collisionable(Collisionable* obj) {
 	remove_obj(collisionable_objs, obj);
 }
@@ -134,12 +189,17 @@ void Game::remove_objs() {
 	collisionable_objs.clear();
 	map_movable_objs.clear();
 	movable_objs.clear();
+	movable_and_collisionable_objs.clear();
 	static_objs.clear();
 	remove_mario();
 }
 
 void Game::remove_static_obj(Rect* obj) {
 	remove_obj(static_objs, obj);
+}
+
+void Game::remove_movable_and_collisionable_obj(MovableCollisionable* obj){
+	remove_obj(movable_and_collisionable_objs, obj);
 }
 
 void Game::start_level() noexcept {
