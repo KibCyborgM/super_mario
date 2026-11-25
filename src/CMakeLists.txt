@@ -33,12 +33,15 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang
     add_compile_options(-finput-charset=utf-8 -fexec-charset=utf-8)
 endif()
 
+set(SOURCES
+    main.cpp
+    app_factory.cpp
+)
+
 if(GAME_TYPE STREQUAL "QtGui")
-    # qt_add_executable подключает корректную точку входа (Qt6::EntryPoint)
-    # на Windows и завершает настройку приложения Qt.
-    qt_add_executable(${PROJECT_NAME} main.cpp)
+    qt_add_executable(${PROJECT_NAME} ${SOURCES})
 else()
-    add_executable(${PROJECT_NAME} main.cpp)
+    add_executable(${PROJECT_NAME} ${SOURCES})
 endif()
 
 if(GAME_TYPE STREQUAL "WindowsConsole")

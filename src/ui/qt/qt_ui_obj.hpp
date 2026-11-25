@@ -3,10 +3,6 @@
 #include "qt_sprite.hpp"
 
 namespace biv {
-	/**
-		Объект, который умеет рисовать QtGameMap. 
-		Аналог ConsoleUIObject: вместо символа-кисти объект называет свой спрайт.
-	*/
 	class QtUIObject {
 		public:
             virtual ~QtUIObject() = default;

@@ -1,10 +1,6 @@
 #pragma once
 
 namespace biv {
-	/**
-		Какой картинкой рисуется объект. 
-		В консольной версии эту роль играет символ-кисть (get_brush).
-	*/
 	enum class QtSprite {
 		BOX,
 		CLOUD,

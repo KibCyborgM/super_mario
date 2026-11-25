@@ -7,12 +7,6 @@
 #include "qt_sprite.hpp"
 
 namespace biv {
-	/**
-		Хранилище картинок: каждая загружается один раз и рисуется много раз.
-		
-		Размер картинки фиксированный и задан в пикселях самим файлом:
-		одна клетка карты - это QtSprites::CELL_SIZE пикселей.
-	*/
 	class QtSprites {
 		public:
 			static constexpr int CELL_SIZE = 16;
