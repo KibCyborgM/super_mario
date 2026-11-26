@@ -1,13 +1,14 @@
 #pragma once
 
 #include "console_box.hpp"
+#include "console_damage_box.hpp"
 #include "console_enemy.hpp"
 #include "console_flyable_enemy.hpp"
+#include "console_heal_kit.hpp"
 #include "console_jumpable_enemy.hpp"
 #include "console_full_box.hpp"
 #include "console_game_map.hpp"
 #include "console_mario.hpp"
-#include "console_money.hpp"
 #include "console_platform.hpp"
 #include "console_ship.hpp"
 #include "ui_factory.hpp"
@@ -17,14 +18,15 @@ namespace biv {
 		private:
 			ConsoleGameMap* game_map = nullptr;
 			std::vector<ConsoleBox*> boxes;
+			std::vector<ConsoleDamageBox*> damage_boxes;
 			std::vector<ConsoleFullBox*> full_boxes;
+			std::vector<ConsoleHealKit*> heal_kits;
 			std::vector<ConsolePlatform*> platforms;
 			std::vector<ConsoleShip*> ships;
 			ConsoleMario* mario = nullptr;
 			std::vector<ConsoleEnemy*> enemies;
 			std::vector<ConsoleFlyableEnemy*> flyable_enemies;
 			std::vector<ConsoleJumpableEnemy*> jumpable_enemies;
-			std::vector<ConsoleMoney*> moneys;
 
 		public:
 			ConsoleUIFactory(Game* game);
@@ -34,10 +36,16 @@ namespace biv {
 			void create_box(
 				const Coord& top_left, const int width, const int height
 			) override;
+			void create_damage_box(
+				const Coord& top_left, const int width, const int height
+			) override;
 			void create_enemy(
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_flyable_enemy(
+				const Coord& top_left, const int width, const int height
+			) override;
+			void create_heal_kit(
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_jumpable_enemy(
@@ -47,9 +55,6 @@ namespace biv {
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_mario(
-				const Coord& top_left, const int width, const int height
-			) override;
-			void create_money(
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_platform(

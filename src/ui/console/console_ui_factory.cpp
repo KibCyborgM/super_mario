@@ -16,8 +16,12 @@ void ConsoleUIFactory::clear_data() {
     mario = nullptr;
     for (ConsoleBox* obj : boxes) delete obj;
     boxes.clear();
+	for (ConsoleDamageBox* obj : damage_boxes) delete obj;
+	damage_boxes.clear();
     for (ConsoleFullBox* obj : full_boxes) delete obj;
     full_boxes.clear();
+	for (ConsoleHealKit* obj : heal_kits) delete obj;
+	heal_kits.clear();
     for (ConsolePlatform* obj : platforms) delete obj;
     platforms.clear();
     for (ConsoleShip* obj : ships) delete obj;
@@ -28,8 +32,6 @@ void ConsoleUIFactory::clear_data() {
     flyable_enemies.clear();
     for (ConsoleJumpableEnemy* obj : jumpable_enemies) delete obj;
     jumpable_enemies.clear();
-    for (ConsoleMoney* obj : moneys) delete obj;
-    moneys.clear();
 }
 
 void ConsoleUIFactory::create_box(
@@ -40,6 +42,17 @@ void ConsoleUIFactory::create_box(
 	game->add_map_movable(box);
 	game->add_static_obj(box);
 	game_map->add_obj(box);
+}
+
+void ConsoleUIFactory::create_damage_box(
+	const Coord& top_left, const int width, const int height
+) {
+	ConsoleDamageBox* damage_box = new ConsoleDamageBox(top_left, width, height);
+	damage_boxes.push_back(damage_box);
+	game->add_map_movable(damage_box);
+	game->add_movable(damage_box);
+	game->add_collisionable(damage_box);
+	game_map->add_obj(damage_box);
 }
 
 void ConsoleUIFactory::create_enemy(
@@ -62,6 +75,17 @@ void ConsoleUIFactory::create_flyable_enemy(
 	game->add_movable(flyable_enemy);
 	game->add_collisionable(flyable_enemy);
 	game_map->add_obj(flyable_enemy);
+}
+
+void ConsoleUIFactory::create_heal_kit(
+	const Coord& top_left, const int width, const int height
+) {
+	ConsoleHealKit* heal_kit = new ConsoleHealKit(top_left, width, height);
+	heal_kits.push_back(heal_kit);
+	game->add_map_movable(heal_kit);
+	game->add_movable(heal_kit);
+	game->add_collisionable(heal_kit);
+	game_map->add_obj(heal_kit);
 }
 
 void ConsoleUIFactory::create_jumpable_enemy(
@@ -104,16 +128,6 @@ void ConsoleUIFactory::create_mario(
 	game_map->add_mario(mario);
 }
 
-void ConsoleUIFactory::create_money(
-	const Coord& top_left, const int width, const int height
-) {
-	ConsoleMoney* money = new ConsoleMoney(top_left, width, height);
-	moneys.push_back(money);
-	game->add_map_movable(money);
-	game->add_movable(money);
-	game->add_collisionable(money);
-	game_map->add_obj(money);
-}
 
 void ConsoleUIFactory::create_platform(
 	const Coord& top_left, const int width, const int height

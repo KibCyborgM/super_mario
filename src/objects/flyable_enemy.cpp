@@ -29,7 +29,7 @@ void FlyableEnemy::process_mario_collision(Collisionable* mario) noexcept {
 		flyable = false;
 		kill();
 	} else {
-		mario->take_damage();
+		mario->take_damage(1);
 	}
 }
 

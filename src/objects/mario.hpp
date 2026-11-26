@@ -21,7 +21,8 @@ namespace biv {
 			void move_map_right() noexcept;
 
 			int get_hp() const noexcept;
-			void take_damage() noexcept override;
+			void heal() noexcept override;
+			void take_damage(const int damage) noexcept override;
 
 			void process_horizontal_static_collision(Rect*) noexcept override;
 			void process_mario_collision(Collisionable*) noexcept override;

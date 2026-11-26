@@ -2,13 +2,14 @@
 	<qresource prefix="/sprites">
 		<file>box.png</file>
 		<file>cloud.png</file>
+		<file>damage_box.png</file>
 		<file>empty_box.png</file>
 		<file>enemy.png</file>
 		<file>flyable_enemy.png</file>
 		<file>full_box.png</file>
+		<file>heal_kit.png</file>
 		<file>jumping_enemy.png</file>
 		<file>mario.png</file>
-		<file>money.png</file>
 		<file>moving_platform.png</file>
 		<file>ship.png</file>
 		<file>water.png</file>

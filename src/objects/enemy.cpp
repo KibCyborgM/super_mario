@@ -27,7 +27,7 @@ void Enemy::process_mario_collision(Collisionable* mario) noexcept {
 	if (mario->get_speed().v > 0 && mario->get_speed().v != V_ACCELERATION) {
 		kill();
 	} else {
-		mario->take_damage();
+		mario->take_damage(1);
 	}
 }
 

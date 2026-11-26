@@ -1,3 +1,5 @@
+#include <random>
+
 #include "full_box.hpp"
 
 using biv::FullBox;
@@ -21,7 +23,16 @@ void FullBox::process_horizontal_static_collision(Rect* obj) noexcept {}
 void FullBox::process_mario_collision(Collisionable* mario) noexcept {
 	if (mario->get_speed().v < 0) {
 		kill();
-		ui_factory->create_money({top_left.x, top_left.y - 3}, 3, 2);
+
+		std::random_device rd;
+    	std::mt19937 gen(rd());
+    	std::uniform_int_distribution<int> dist(0, 1);
+
+		if (dist(gen) == 0) {
+			ui_factory->create_heal_kit({top_left.x, top_left.y - 3}, 3, 2);
+		} else {
+			ui_factory->create_damage_box({top_left.x, top_left.y - 3}, 3, 2);
+		}
 	}
 }
 

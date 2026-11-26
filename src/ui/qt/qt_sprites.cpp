@@ -8,13 +8,14 @@ using biv::QtSprites;
 QtSprites::QtSprites() {
 	load(QtSprite::BOX, "box.png");
 	load(QtSprite::CLOUD, "cloud.png");
+	load(QtSprite::DAMAGE_BOX, "damage_box.png");
 	load(QtSprite::EMPTY_BOX, "empty_box.png");
 	load(QtSprite::ENEMY, "enemy.png");
 	load(QtSprite::FLYABLE_ENEMY, "flyable_enemy.png");
 	load(QtSprite::FULL_BOX, "full_box.png");
+	load(QtSprite::HEAL_KIT, "heal_kit.png");
 	load(QtSprite::JUMPABLE_ENEMY, "jumping_enemy.png");
 	load(QtSprite::MARIO, "mario.png");
-	load(QtSprite::MONEY, "money.png");
 	load(QtSprite::PLATFORM, "moving_platform.png");
 	load(QtSprite::SHIP, "ship.png");
 	load(QtSprite::WATER, "water.png");
