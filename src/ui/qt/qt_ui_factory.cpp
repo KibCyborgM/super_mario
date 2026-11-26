@@ -130,9 +130,9 @@ void QtUIFactory::create_ship(const Coord& pos, int w, int h) {
     game_map->add_obj(obj);
 }
 
-GameMap* QtUIFactory::get_game_map(int h, int w) {
-    if (game_map == nullptr) game_map = new QtGameMap(h, w);
+biv::GameMap* QtUIFactory::get_game_map(int h, int w) {
+    if (game_map == nullptr) game_map = new biv::QtGameMap(h, w);
     return game_map;
 }
 
-Mario* QtUIFactory::get_mario() { return mario; }
+biv::Mario* QtUIFactory::get_mario() { return mario; }
