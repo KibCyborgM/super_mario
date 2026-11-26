@@ -1,8 +1,12 @@
 #include "qt_game_map.hpp"
+#include "qt_mario.hpp"
 
 #include <algorithm>
 
 #include <QColor>
+#include <QFont>
+#include <QFontMetrics>
+#include <QString>
 #include <QPainter>
 
 using biv::QtGameMap;
@@ -34,6 +38,10 @@ void QtGameMap::add_obj(QtUIObject* obj) {
 	objs.push_back(obj);
 }
 
+void QtGameMap::add_mario(biv::QtMario* mario) {
+	mario_obj = mario;
+}
+
 void QtGameMap::clear() noexcept {
 	QPainter painter(&frame);
 	
@@ -61,14 +69,20 @@ void QtGameMap::refresh() noexcept {
 			draw_obj(painter, obj);
 		}
 	}
+	// Индикатор здоровья рисуется поверх игровых объектов.
+	draw_hp(painter);
 }
 
 void QtGameMap::remove_obj(QtUIObject* obj) {
+	if (obj == mario_obj) {
+		mario_obj = nullptr;
+	}
 	objs.erase(std::remove(objs.begin(), objs.end(), obj), objs.end());
 }
 
 void QtGameMap::remove_objs() {
 	objs.clear();
+	mario_obj = nullptr;
 }
 
 void QtGameMap::show() const noexcept {
@@ -79,6 +93,33 @@ void QtGameMap::show() const noexcept {
 // ----------------------------------------------------------------------------
 // 									PRIVATE
 // ----------------------------------------------------------------------------
+void QtGameMap::draw_hp(QPainter& painter) const {
+	if (mario_obj == nullptr) {
+		return;
+	}
+
+	painter.save();
+	QFont font("Arial");
+	font.setPixelSize(24);
+	font.setBold(true);
+	painter.setFont(font);
+
+	const int x = 10;
+	const int y = 10 + painter.fontMetrics().ascent();
+	const QString label = QStringLiteral("HP:");
+	painter.setPen(Qt::black);
+	painter.drawText(x, y, label);
+
+	QString hearts;
+	for (int i = 0; i < mario_obj->get_hp(); i++) {
+		hearts += QChar(0x2665);
+	}
+
+	painter.setPen(QColor(220, 30, 40));
+	painter.drawText(x + painter.fontMetrics().horizontalAdvance(label) + 8, y, hearts);
+	painter.restore();
+}
+
 void QtGameMap::draw_obj(QPainter& painter, const QtUIObject* obj) const {
 	// Координаты объекта заданы в клетках карты, а рисуем в пикселях.
 	const int left = obj->get_left() * CELL;

@@ -110,6 +110,7 @@ void QtUIFactory::create_mario(const Coord& pos, int w, int h) {
     game->add_movable(mario);
     game->add_mario(mario);
     game_map->add_obj(mario);
+    game_map->add_mario(mario);
 }
 
 void QtUIFactory::create_platform(const Coord& pos, int w, int h) {

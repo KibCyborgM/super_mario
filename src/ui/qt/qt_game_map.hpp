@@ -12,6 +12,8 @@
 class QPainter;
 
 namespace biv {
+	class QtMario;
+
 	class QtGameMap : public GameMap {
 		private:
 			// Сколько столбцов карты помещается в окно. Марио стоит на месте, 
@@ -23,6 +25,7 @@ namespace biv {
 			QtSprites sprites;
 			QPixmap frame;
 			QtGameWidget* widget = nullptr;
+			QtMario* mario_obj = nullptr;
 			
 			std::vector<QtUIObject*> objs;
 			
@@ -31,6 +34,7 @@ namespace biv {
 			~QtGameMap();
 			
 			void add_obj(QtUIObject*);
+			void add_mario(QtMario* mario);
 			void clear() noexcept override;
 			void refresh() noexcept override;
 			void remove_obj(QtUIObject*);
@@ -38,6 +42,7 @@ namespace biv {
 			void show() const noexcept override;
 
 		private:
+			void draw_hp(QPainter& painter) const;
 			void draw_obj(QPainter& painter, const QtUIObject* obj) const;
 			void draw_tiles(
 				QPainter& painter, const QPixmap& sprite,
