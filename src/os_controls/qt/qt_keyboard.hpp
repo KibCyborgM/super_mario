@@ -7,7 +7,7 @@
 class QEvent;
 
 namespace biv {
-	class QtKeyboard : public QObject, public KeyBoard {
+	class QtKeyBoard : public QObject, public KeyBoard {
 		private:
 			bool is_on = false;
 			
