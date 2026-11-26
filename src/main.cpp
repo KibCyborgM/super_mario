@@ -24,7 +24,6 @@ int main(int argc, char* argv[]) {
 	#if defined(QT_GUI)
 	QApplication qt_app(argc, argv);
 	#endif
-	auto frame_delay = std::chrono::milliseconds(0);
 	
 	biv::Game game;
 
@@ -107,7 +106,7 @@ int main(int argc, char* argv[]) {
 		game_map->refresh();
 		app_factory->control_settings->set_cursor_start_position();
 		game_map->show();
-		std::this_thread::sleep_for(frame_delay);
+		std::this_thread::sleep_for(app_factory->frame_delay);
 	} while (
 		/* 5. Проверка того, не окончена ли игра */ 
 		!game.is_finished()

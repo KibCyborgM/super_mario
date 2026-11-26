@@ -28,6 +28,7 @@ AppFactory::AppFactory(
     control_settings = new WindowsControlSettings();
     keyboard = new WindowsKeyBoard();
     ui_factory = new ConsoleUIFactory(game);
+    frame_delay = std::chrono::milliseconds(10);
 
 #elif defined(LINUX_CONSOLE)
     control_settings = new LinuxControlSettings(
@@ -35,11 +36,13 @@ AppFactory::AppFactory(
     );
     keyboard = new LinuxKeyBoard();
     ui_factory = new ConsoleUIFactory(game);
+    frame_delay = std::chrono::milliseconds(50);
 
 #elif defined(QT_GUI)
     control_settings = new QtControlSettings();
     keyboard = new QtKeyBoard();
     ui_factory = new QtUIFactory(game);
+    frame_delay = std::chrono::milliseconds(30);
 #endif
 }
 
