@@ -1,5 +1,8 @@
 #include <thread>
 #include <memory>
+#ifdef QT_GUI
+    #include <QApplication>
+#endif
 
 #include "another_second_level.hpp"
 

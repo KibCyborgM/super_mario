@@ -4,7 +4,7 @@
 #include <QEvent>
 #include <QKeyEvent>
 
-using biv::QtKeyboard;
+using biv::QtKeyBoard;
 using biv::UserInput;
 
 namespace {
@@ -32,7 +32,7 @@ namespace {
 	}
 }
 
-UserInput QtKeyboard::get_user_input() {
+UserInput QtKeyBoard::get_user_input() {
 	// Игровой цикл не отдаёт управление Qt, поэтому события окна
 	// (клавиши, перерисовка, закрытие) обрабатываются здесь.
 	QCoreApplication::processEvents();
@@ -57,7 +57,7 @@ UserInput QtKeyboard::get_user_input() {
 	return UserInput::NO_INPUT;
 }
 
-void QtKeyboard::off() {
+void QtKeyBoard::off() {
 	if (is_on) {
 		QCoreApplication::instance()->removeEventFilter(this);
 		is_on = false;
@@ -65,7 +65,7 @@ void QtKeyboard::off() {
 	release_keys();
 }
 
-void QtKeyboard::on() {
+void QtKeyBoard::on() {
 	if (!is_on) {
 		// Фильтр на уровне приложения видит клавиши, какое бы окно их ни получило.
 		QCoreApplication::instance()->installEventFilter(this);
@@ -76,7 +76,7 @@ void QtKeyboard::on() {
 // ----------------------------------------------------------------------------
 // 									PROTECTED
 // ----------------------------------------------------------------------------
-bool QtKeyboard::eventFilter(QObject* watched, QEvent* event) {
+bool QtKeyBoard::eventFilter(QObject* watched, QEvent* event) {
 	switch (event->type()) {
 		case QEvent::KeyPress:
 			process_key(static_cast<QKeyEvent*>(event)->key(), true);
@@ -106,7 +106,7 @@ bool QtKeyboard::eventFilter(QObject* watched, QEvent* event) {
 // ----------------------------------------------------------------------------
 // 									PRIVATE
 // ----------------------------------------------------------------------------
-void QtKeyboard::process_key(const int key, const bool pressed) noexcept {
+void QtKeyBoard::process_key(const int key, const bool pressed) noexcept {
 	if (is_left_key(key)) {
 		left_pressed = pressed;
 	} else if (is_right_key(key)) {
@@ -121,7 +121,7 @@ void QtKeyboard::process_key(const int key, const bool pressed) noexcept {
 	}
 }
 
-void QtKeyboard::release_keys() noexcept {
+void QtKeyBoard::release_keys() noexcept {
 	left_pressed = false;
 	right_pressed = false;
 	jump_pressed = false;
