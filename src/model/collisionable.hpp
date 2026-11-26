@@ -16,6 +16,7 @@ namespace biv {
 			bool is_active() const noexcept;
 			void kill() noexcept;
 			virtual void take_damage() noexcept;
+			virtual void heal() noexcept;
 
 			virtual Rect get_rect() const noexcept = 0;
 			virtual Speed get_speed() const noexcept = 0;

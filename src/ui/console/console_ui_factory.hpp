@@ -3,6 +3,7 @@
 #include "console_box.hpp"
 #include "console_enemy.hpp"
 #include "console_flyable_enemy.hpp"
+#include "console_heal_kit.hpp"
 #include "console_jumpable_enemy.hpp"
 #include "console_full_box.hpp"
 #include "console_game_map.hpp"
@@ -18,6 +19,7 @@ namespace biv {
 			ConsoleGameMap* game_map = nullptr;
 			std::vector<ConsoleBox*> boxes;
 			std::vector<ConsoleFullBox*> full_boxes;
+			std::vector<ConsoleHealKit*> heal_kits;
 			std::vector<ConsolePlatform*> platforms;
 			std::vector<ConsoleShip*> ships;
 			ConsoleMario* mario = nullptr;
@@ -38,6 +40,9 @@ namespace biv {
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_flyable_enemy(
+				const Coord& top_left, const int width, const int height
+			) override;
+			void create_heal_kit(
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_jumpable_enemy(

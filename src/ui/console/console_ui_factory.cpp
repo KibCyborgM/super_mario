@@ -18,6 +18,8 @@ void ConsoleUIFactory::clear_data() {
     boxes.clear();
     for (ConsoleFullBox* obj : full_boxes) delete obj;
     full_boxes.clear();
+	for (ConsoleHealKit* obj : heal_kits) delete obj;
+	heal_kits.clear();
     for (ConsolePlatform* obj : platforms) delete obj;
     platforms.clear();
     for (ConsoleShip* obj : ships) delete obj;
@@ -62,6 +64,17 @@ void ConsoleUIFactory::create_flyable_enemy(
 	game->add_movable(flyable_enemy);
 	game->add_collisionable(flyable_enemy);
 	game_map->add_obj(flyable_enemy);
+}
+
+void ConsoleUIFactory::create_heal_kit(
+	const Coord& top_left, const int width, const int height
+) {
+	ConsoleHealKit* heal_kit = new ConsoleHealKit(top_left, width, height);
+	heal_kits.push_back(heal_kit);
+	game->add_map_movable(heal_kit);
+	game->add_movable(heal_kit);
+	game->add_collisionable(heal_kit);
+	game_map->add_obj(heal_kit);
 }
 
 void ConsoleUIFactory::create_jumpable_enemy(

@@ -20,6 +20,8 @@ void Collisionable::kill() noexcept {
 	is_active_ = false;
 }
 
+void Collisionable::heal() noexcept {}
+
 void Collisionable::take_damage() noexcept {
     kill();
 }

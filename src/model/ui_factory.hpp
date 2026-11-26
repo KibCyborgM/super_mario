@@ -26,6 +26,8 @@ namespace biv {
 				const Coord& top_left, const int width, const int height) = 0;
 			virtual void create_flyable_enemy(
 				const Coord& top_left, const int width, const int height) = 0;
+			virtual void create_heal_kit(
+				const Coord& top_left, const int width, const int height) = 0;
 			virtual void create_jumpable_enemy(
 				const Coord& top_left, const int width, const int height) = 0;
 			virtual void create_full_box(
