@@ -101,6 +101,7 @@ void ConsoleUIFactory::create_mario(
 	game->add_movable(mario);
 	game->add_mario(mario);
 	game_map->add_obj(mario);
+	game_map->add_mario(mario);
 }
 
 void ConsoleUIFactory::create_money(

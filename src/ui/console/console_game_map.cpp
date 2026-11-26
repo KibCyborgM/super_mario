@@ -32,6 +32,10 @@ void ConsoleGameMap::add_obj(ConsoleUIObject* obj) {
 	objs.push_back(obj);
 }
 
+void ConsoleGameMap::add_mario(ConsoleMario* mario) {
+	mario_obj = mario;
+}
+
 void ConsoleGameMap::clear() noexcept {
 	// Воздух
 	for (int i = 0; i < width; i++) {
@@ -42,6 +46,10 @@ void ConsoleGameMap::clear() noexcept {
 	for (int i = 1; i < height - 3; i++) {
 		std::sprintf(map[i], "%s", map[0]);
 	}
+
+	map[0][0] = 'H';
+	map[0][1] = 'P';
+	map[0][2] = ':';
 	
 	// Вода
 	for (int i = 0; i < width; i++) {
@@ -57,6 +65,11 @@ void ConsoleGameMap::clear() noexcept {
 void ConsoleGameMap::refresh() noexcept {
 	clear();
 	
+	int hp = mario_obj->get_hp();
+	for (int i = 0; i < hp; i++) {
+		map[0][i+3] = '+';
+	}
+
 	for (ConsoleUIObject* obj: objs) {
 		int left = obj->get_left();
 		int top = obj->get_top();
