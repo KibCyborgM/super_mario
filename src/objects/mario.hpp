@@ -8,7 +8,7 @@
 namespace biv {
 	class Mario : public Movable, public Collisionable {
 		private:
-			int hp = 1;
+			int hp = 3;
 		public:
 			Mario(const Coord& top_left, const int width, const int height);
 
@@ -21,6 +21,7 @@ namespace biv {
 			void move_map_right() noexcept;
 
 			int get_hp() const noexcept;
+			void take_damage() noexcept override;
 
 			void process_horizontal_static_collision(Rect*) noexcept override;
 			void process_mario_collision(Collisionable*) noexcept override;

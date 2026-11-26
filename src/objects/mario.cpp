@@ -27,6 +27,17 @@ int Mario::get_hp() const noexcept {
 	return hp;
 }
 
+void Mario::take_damage() noexcept {
+	hp--;
+	if (hp <= 0) {
+		kill();
+	}
+	else {
+		top_left.y -= 1;
+		vspeed = JUMP_SPEED;
+	}
+}
+
 void Mario::process_horizontal_static_collision(Rect* obj) noexcept {
 	hspeed = -hspeed;
 	move_horizontally();

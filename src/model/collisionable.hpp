@@ -15,6 +15,7 @@ namespace biv {
 			bool has_collision(Rect*) const noexcept;
 			bool is_active() const noexcept;
 			void kill() noexcept;
+			virtual void take_damage() noexcept;
 
 			virtual Rect get_rect() const noexcept = 0;
 			virtual Speed get_speed() const noexcept = 0;
