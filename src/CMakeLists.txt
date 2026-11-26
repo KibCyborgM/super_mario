@@ -35,7 +35,6 @@ endif()
 
 set(SOURCES
     main.cpp
-    app_factory.cpp
 )
 
 if(GAME_TYPE STREQUAL "QtGui")
