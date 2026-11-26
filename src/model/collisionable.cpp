@@ -22,6 +22,6 @@ void Collisionable::kill() noexcept {
 
 void Collisionable::heal() noexcept {}
 
-void Collisionable::take_damage() noexcept {
+void Collisionable::take_damage(const int damage) noexcept {
     kill();
 }

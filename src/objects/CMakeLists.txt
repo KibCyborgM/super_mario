@@ -1,5 +1,6 @@
 target_sources(${PROJECT_NAME}
 	PRIVATE
+		damage_box.cpp
 		flyable_enemy.cpp
 		heal_kit.cpp
 		jumpable_enemy.cpp

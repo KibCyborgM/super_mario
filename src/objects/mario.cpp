@@ -31,8 +31,8 @@ void Mario::heal() noexcept {
 	hp++;
 }
 
-void Mario::take_damage() noexcept {
-	hp--;
+void Mario::take_damage(const int damage) noexcept {
+	hp -= damage;
 	if (hp <= 0) {
 		kill();
 	}
