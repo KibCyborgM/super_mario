@@ -1,5 +1,6 @@
 target_sources(${PROJECT_NAME}
 	PRIVATE
+		qt_app_factory.cpp
 		qt_control_settings.cpp
 		qt_keyboard.cpp
 )

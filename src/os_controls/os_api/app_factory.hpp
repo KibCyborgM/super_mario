@@ -10,18 +10,13 @@
 namespace biv {
 	class AppFactory {
         public:
-            OSControlSettings* control_settings = nullptr;
-	        KeyBoard* keyboard = nullptr;
-            UIFactory* ui_factory = nullptr;
-            std::chrono::milliseconds frame_delay{0};
+            AppFactory() = default;
 
-		
-			AppFactory() = delete;
-            AppFactory(Game* game, const int map_height, const int map_weight);
+            virtual OSControlSettings* create_control_settings(const int map_height, const int map_weight) = 0;
+            virtual KeyBoard* create_keyboard() = 0;
+            virtual UIFactory* create_ui_factory(Game* game) = 0;
+            virtual std::chrono::milliseconds create_frame_delay() = 0;
 
-            ~AppFactory();
-
-
-
+            virtual ~AppFactory() = default;
 	};
 }
