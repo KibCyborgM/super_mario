@@ -1,7 +1,6 @@
 #pragma once
 
 #include "app_factory.hpp"
-#include "game.hpp"
 #include "qt_control_settings.hpp"
 #include "qt_keyboard.hpp"
 #include "qt_ui_factory.hpp"
